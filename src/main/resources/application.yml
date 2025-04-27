@@ -1,0 +1,105 @@
+# JVM memory settings
+jvm:
+  initial-heap-size: 256m
+  max-heap-size: 512m
+
+server:
+  port: 8080
+  error:
+    include-stacktrace: never
+  shutdown: graceful
+
+spring:
+  application:
+    name: api-cdt-pjpur-service
+  threads:
+    virtual:
+      enabled: true
+  thread-executor: virtual
+  config:
+    use-legacy-processing: true
+  jmx:
+    enabled: true
+  data:
+    mongodb:
+      uri: mongodb://mongodb:27017/pjpur_data
+
+  kafka:
+    bootstrap-servers: kafka:9092
+    consumer:
+      group-id: core-pjpur-group
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+    admin:
+      auto-create-topics: true
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+
+---
+management:
+  server:
+    port: 7180
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true
+  endpoint:
+    health:
+      show-details: ALWAYS
+  metrics:
+    tags:
+      application: api-cdt-pjpur-service
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: 'true'
+  tracing:
+    sampling:
+      probability: 1.0
+  observations:
+    key-values:
+      application: api-cdt-pjpur-service
+
+logging:
+  pattern:
+    correlation: "[${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+  level:
+    root: WARN
+    agus.ramdan.cdt.pjpur: DEBUG
+    agus.ramdan.cdt.base: DEBUG
+
+pjpur:
+  base-url: END POINT
+  private-key: |
+    -----BEGIN PRIVATE KEY-----
+    ECLIPSE PRIVATE KEY
+    -----END PRIVATE KEY-----
+
+  collect:
+    path: /collect
+    oprid : 1234567890
+  deposit:
+    path: /deposit
+    oprid : 1234567890
+  verify:
+    path: /verify
+
