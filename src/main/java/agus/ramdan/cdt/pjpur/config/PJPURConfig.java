@@ -24,8 +24,6 @@ public class PJPURConfig {
     private ApiUrlConfig deposit;
     private ApiUrlConfig verify;
 
-
-
     private LocalTransferBalanceConfig localTransfer;
 
     @Getter
@@ -39,6 +37,7 @@ public class PJPURConfig {
     public static class ApiUrlConfig {
         private String path;
         private String oprid;
+        private String srcacc;
     }
     @Getter
     @Setter

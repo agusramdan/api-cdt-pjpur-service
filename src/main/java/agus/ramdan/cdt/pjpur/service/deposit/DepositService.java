@@ -42,6 +42,9 @@ public class DepositService {
         if (depositDTO.getOprid() == null) {
             depositDTO.setOprid(pjpurConfig.getDeposit().getOprid());
         }
+        if (depositDTO.getSrcacc() == null) {
+            depositDTO.setSrcacc(pjpurConfig.getDeposit().getSrcacc());
+        }
         String payload;
         try {
             payload = objectMapper.writeValueAsString(PayloadDTO.builder()
