@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestClient;
 
 import java.security.KeyFactory;
@@ -21,6 +22,7 @@ public class RestClientConfig {
     @Bean
     public RestClient restClient(RestClient.Builder builder,PJPURConfig pjpurConfig) {
         return builder
+                .requestFactory(new HttpComponentsClientHttpRequestFactory())
                 .baseUrl(pjpurConfig.getBaseUrl())
                 .defaultHeader("X-MB-account", pjpurConfig.getAccount())
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, "application/jwt")

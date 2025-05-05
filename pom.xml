@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>agus.ramdan.cdt</groupId>
 	<artifactId>api-cdt-pjpur-service</artifactId>
-	<version>21.3.4.4.0.20250412</version>
+	<version>21.3.4.4.0.20250414</version>
 	<name>api-cdt-pjpur-service</name>
 	<description>PJPUR</description>
 	<url/>
@@ -157,6 +157,10 @@
 			<artifactId>jjwt-jackson</artifactId>
 			<version>0.11.5</version>
 			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents.client5</groupId>
+			<artifactId>httpclient5</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>agus.ramdan.cdt</groupId>
