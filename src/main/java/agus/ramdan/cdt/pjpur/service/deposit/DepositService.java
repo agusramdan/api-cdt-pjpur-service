@@ -31,7 +31,7 @@ public class DepositService {
     private final ObjectMapper objectMapper;
 
     public ResponseDTO deposit(DepositDTO depositDTO) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssSSSXXX");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
         ZonedDateTime zonedDateTime = ZonedDateTime.now(ZoneId.of("Asia/Jakarta"));
         String timestamp =zonedDateTime.format(formatter);
         String url = pjpurConfig.getBaseUrl() + pjpurConfig.getDeposit().getPath();
@@ -44,6 +44,10 @@ public class DepositService {
         }
         if (depositDTO.getSrcacc() == null) {
             depositDTO.setSrcacc(pjpurConfig.getDeposit().getSrcacc());
+        }
+        if (depositDTO.getTimestamp() == null) {
+            formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmssXXXX");
+            depositDTO.setTimestamp(formatter.format(zonedDateTime));
         }
         String payload;
         try {
@@ -59,7 +63,7 @@ public class DepositService {
         String token = Jwts.builder()
                 .setHeader(header)
                 .setPayload(payload)
-                // RS256 with privateKey
+                // ES256 with privateKey
                 .signWith(SignatureAlgorithm.ES256, privateKey).compact();
         log.info("Request deposit token: {}", token);
         return restClient
