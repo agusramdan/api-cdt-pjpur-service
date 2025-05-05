@@ -161,7 +161,7 @@
 		<dependency>
 			<groupId>agus.ramdan.cdt</groupId>
 			<artifactId>api-cdt-core-service</artifactId>
-			<version>21.3.4.4.0.202504125</version>
+			<version>21.3.4.4.0.202504124</version>
 			<classifier>client</classifier>
 			<exclusions>
 				<exclusion>
