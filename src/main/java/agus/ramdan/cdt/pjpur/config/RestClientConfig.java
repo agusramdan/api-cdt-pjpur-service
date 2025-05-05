@@ -25,7 +25,7 @@ public class RestClientConfig {
                 .requestFactory(new HttpComponentsClientHttpRequestFactory())
                 .baseUrl(pjpurConfig.getBaseUrl())
                 .defaultHeader("X-MB-account", pjpurConfig.getAccount())
-                .defaultHeader(HttpHeaders.CONTENT_TYPE, "application/jwt")
+                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE)
                 .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
                 .build();
     }
