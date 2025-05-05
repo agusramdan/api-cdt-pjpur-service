@@ -86,6 +86,8 @@ logging:
     root: WARN
     agus.ramdan.cdt.pjpur: DEBUG
     agus.ramdan.cdt.base: DEBUG
+    org.apache.hc.client5.http.wire: DEBUG
+    org.apache.hc.client5.http: DEBUG
 
 pjpur:
   base-url: END POINT
